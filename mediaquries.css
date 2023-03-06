@@ -1,0 +1,14 @@
+@media screen and (max-width:310px){
+    .container{
+        width: 276px;
+    }
+    label{
+        margin-left: 2rem;
+    }
+    input{
+    width: 89%;
+    }
+}
+
+
+

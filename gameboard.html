@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles2.css">
+    <link rel="stylesheet" href="mediaquries.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="scoreboard">
+        <p class="score">
+            Bhanu - 3
+        </p>
+        
+            <p class="score">Shikha - 5</p>
+    
+    </div>
+
+    <div class="gamestopped">
+        <h2>Player X Wins</h2>
+        <div class="buttons">
+            <button id="replay" onclick="window.location.href='gameboard.html'">
+                Play Again
+            </button>
+       
+        <button id="restart" onclick="window.location.href='index.html'">
+        Quit
+        </button>
+    </div>
+    </div>
+    <h1 class="turn">Turn - Bhanu X</h1>
+
+
+
+    <div class="gameboard">
+        <div class="gameboardrow">
+        <div class="box" id="box1" onclick="btnpressed('box1')"></div>
+        <div class="vr"></div>
+        <div class="box" id="box2" onclick="btnpressed('box2')"></div>
+        <div class="vr"></div>
+        <div class="box" id="box3" onclick="btnpressed('box3')"></div>
+        
+    </div>
+    <div class="hr"></div>
+    <div class="gameboardrow">
+        <div class="box" id="box4" onclick="btnpressed('box4')"></div>
+        <div class="vr"></div>
+        <div class="box" id="box5" onclick="btnpressed('box5')"></div>
+        <div class="vr"></div>
+        <div class="box" id="box6" onclick="btnpressed('box6')"></div>
+       
+    </div>
+    <div class="hr"></div>
+
+    <div class="gameboardrow">
+        <div class="box" id="box7" onclick="btnpressed('box7')"></div>
+        <div class="vr"></div>
+        <div class="box" id="box8" onclick="btnpressed('box8')"></div>
+        <div class="vr"></div>
+        <div class="box" id="box9" onclick="btnpressed('box9')"></div>
+    </div>
+    </div>
+
+    <div class="bottombtns">
+        <button class="btn" id="quit" onclick="window.location.href='index.html'">Quit</button>
+        <button class="btn" id="reset" onclick="window.location.href='gameboard.html'">Reset</button>
+    </div>
+
+   
+
+    <script>
+       let playerx =  localStorage.getItem('playerx');
+       let playero = localStorage.getItem('playero');
+       //console.log(playerx,playero);
+
+       let playerxscore = localStorage.getItem('playerxscore');
+       let playeroscore = localStorage.getItem('playeroscore');
+       
+
+       const setscoreboard = ()=>{
+       
+
+       let playerxscore = localStorage.getItem('playerxscore');
+       let playeroscore = localStorage.getItem('playeroscore');
+       //console.log(playerxscore,playeroscore);
+
+       document.querySelector('.scoreboard').innerHTML=`<p class="score">
+            ${playerx} - ${playerxscore}
+        </p>
+        
+        <p class="score">${playero} - ${playeroscore}</p>`
+
+       }
+
+       setscoreboard();
+
+       let turn = 'playerx';
+      
+       const setTurn=(turn)=>{
+            if(turn=='playerx'){
+                document.querySelector('h1').innerHTML = `TURN - ${playerx} (X) `;
+            }
+            else{
+                document.querySelector('h1').innerHTML=`TURN - ${playero} (O)`;
+            }
+       }
+       setTurn(turn);
+    
+
+       const checkwin = ()=>{
+        let box1 = document.getElementById('box1').innerHTML;
+        let box2 = document.getElementById('box2').innerHTML;
+        let box3 = document.getElementById('box3').innerHTML;
+        let box4 = document.getElementById('box4').innerHTML;
+        let box5 = document.getElementById('box5').innerHTML;
+        let box6 = document.getElementById('box6').innerHTML;
+        let box7 = document.getElementById('box7').innerHTML;
+        let box8 = document.getElementById('box8').innerHTML;
+        let box9 = document.getElementById('box9').innerHTML;
+        let gamestopped = document.querySelector('.gamestopped');
+
+        if(box1=='X'&&box2=='X'&&box3=='X' || box4=='X'&& box5=='X' && box6 =='X' || box7 =='X' && box8=='X' && box9 =='X' || box1 =='X' && box4=='X' && box7 =='X'  || box2 =='X' && box5=='X' && box8 =='X' ||box3=='X' && box6=='X' && box9 =='X' || box1 =='X' && box5=='X' && box9 =='X' ||box3 =='X' && box5=='X' && box7 =='X'   )
+        {
+            let playerxscore = localStorage.getItem("playerxscore");
+            playerxscore = parseInt(playerxscore) + 1;
+            localStorage.setItem('playerxscore',playerxscore);
+            setscoreboard();
+        
+
+            gamestopped.style.display="flex";
+            gamestopped.innerHTML=`<h2> ${playerx} Wins 🎉🎉</h2>
+        <div>
+            <button id="replay" onclick="window.location.href='gameboard.html'">
+                Play Again
+            </button>
+        
+        <button id="restart" onclick="window.location.href='index.html'">
+        Quit
+        </button> 
+    </div>`
+        }
+
+        else if(box1=='O'&&box2=='O'&&box3=='O' || box4=='O'&& box5=='O' && box6 =='O' || box7 =='O' && box8=='O' && box9 =='O' || box1 =='O' && box4=='O' && box7 =='O'  || box2 =='O' && box5=='O' && box8 =='O' ||box3=='O' && box6=='O' && box9 =='O' || box1 =='O' && box5=='O' && box9 =='O' ||box3 =='O' && box5=='O' && box7 =='O'   )
+        {
+            let playeroscore = localStorage.getItem("playeroscore");
+            playeroscore = parseInt(playeroscore) + 1;
+            localStorage.setItem('playeroscore',playeroscore);
+            setscoreboard();
+            gamestopped.style.display="flex";
+            gamestopped.innerHTML=`<h2> ${playero} Wins 🎉🎉</h2>
+        <div>
+            <button id="replay" onclick="window.location.href='gameboard.html'">
+                Play Again
+            </button>
+        
+        <button id="restart" onclick="window.location.href='index.html'">
+        Quit
+        </button> 
+    </div>`
+
+
+        }
+
+        else if(box1!="" && box2!="" && box3!="" && box4!="" && box5!="" && box6!="" && box7!="" && box8!="" && box9 !=""  )
+        {
+            gamestopped.style.display="flex";
+            gamestopped.innerHTML=`<h2>Match Drawn!! 🤯</h2>
+        <div>
+            <button id="replay" onclick="window.location.href='gameboard.html'">
+                Play Again
+            </button>
+        
+        <button id="restart" onclick="window.location.href='index.html'">
+        Quit
+        </button> 
+    </div>`
+        }
+       }
+
+       const showxo = (boxid)=>{
+        let box = document.getElementById(boxid);
+        if(turn=='playerx' && box.innerHTML=="")
+        {
+            box.innerHTML="X";
+            turn='playero';
+            setTurn(turn);
+            box.style.backgroundColor='#ffff';
+            box.style.opacity="0.4";
+            box.style.color="black";
+            
+        }
+        else if(turn=='playero'&& box.innerHTML==""){
+            box.innerHTML="O";
+            turn='playerx';
+            setTurn(turn);
+            box.style.backgroundColor='#fff';
+            box.style.opacity="0.4";
+            box.style.color="black";
+        }
+       }
+
+
+       const btnpressed = async(boxid)=>{
+        await showxo(boxid);
+        checkwin();
+       }
+
+    </script>
+</body>
+</html>
