@@ -1,6 +1,6 @@
-@media screen and (max-width:310px){
+@media screen and (max-width:320px){
     .container{
-        width: 255px;
+        width: 257px;
     }
     label{
         margin-left: 2rem;
